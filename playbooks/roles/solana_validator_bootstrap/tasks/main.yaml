@@ -1,49 +1,48 @@
 ---
-- name: check solana cli installed
+- name: 00 Check if Solana cli is installed
   stat:
     path: /home/solana/.local/share/solana/install/active_release/bin/solana-install
   register: solana_exists
   tags:
     - solana.cli.install
 
-- name: install solana cli
-  import_tasks: install_solana_client.yaml
+- name: 01 Install Solana/Agave cli
+  import_tasks: 01_install_solana_client.yaml
   tags:
     - solana.cli.install
   when: not solana_exists.stat.exists
 
-- name: Set cluster environment
-  import_tasks: cluster_environment.yaml
+- name: 02 Set cluster environment
+  import_tasks: 02_cluster_environment.yaml
   tags:
     - validator.manage.cluster
 
-- name: Confugure validator
-  import_tasks: configure_validator.yaml
+- name: 03 Configure Validator
+  import_tasks: 03_configure_validator.yaml
   tags:
     - validator.manage.config
 
-- name: Setup logrotate
-  import_tasks: logrotate.yaml
+- name: 04 Setup logrotate
+  import_tasks: 04_logrotate.yaml
   tags:
     - validator.logrotate
 
-- name: Create solana validator service
-  import_tasks: solana-validator.service.yaml
+- name: 05 Create Solana Validator Service file
+  import_tasks: 05_solana_validator_service.yaml
   tags:
     - validator.service.solana
 
-- name: Copy utils scripts
-  import_tasks: copy_scripts.yaml
+- name: 06 Copy Utils scripts
+  import_tasks: 06_copy_scripts.yaml
   tags:
     - copy.scripts
 
-- name: Create unfunded validator keypair
-  import_tasks: create_unfunded_validator_keypair.yaml
+- name: 07 Create unfunded validator keypair
+  import_tasks: 07_create_unfunded_validator_keypair.yaml
   tags:
     - create.unfunded_validator_keypair
 
-- name: Custom Motd config
-  import_tasks: motd_config.yaml
+- name: 08 Custom Motd config
+  import_tasks: 08_motd_config.yaml
   tags:
     - validator.service.solana
-

@@ -1,39 +1,38 @@
 ---
-- name: 🤹 set force install fact
+- name: 02.01 set force install fact
   set_fact:
     force: "{{ force | default('false')  }}"
   tags:
     - config.swap
 
-- name: 🤹 check swap file exists
+- name: 02.02 check swap file exists
   stat:
     path: "{{ mount_base_path }}/swap/swapfile"
     get_checksum: no
-    get_md5: no
   tags:
     - config.swap
   register: swap_file_exists
 
-- name: 🤹 Create swap dir mount point
+- name: 02.03 Create swap dir mount point
   file:
     path: "{{ mount_base_path }}/swap"
     state: directory
     mode: '0755'
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 disable current swap
+- name: 02.04 disable current swap
   command: swapoff -a
   tags:
     - config.swap.file.disable
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 Create swap file
+- name: 02.05 Create swap file
   command: fallocate -l {{ swap_file_size_gb }}G {{ mount_base_path }}/swap/swapfile 
   tags:
     - config.swap.file.create
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 Change swap file permissions
+- name: 02.06 Change swap file permissions
   file: path="{{ mount_base_path }}/swap/swapfile"
         owner=root
         group=root
@@ -42,13 +41,13 @@
     - config.swap.file.permissions
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 Make swap file
+- name: 02.07 Make swap file
   command: "mkswap {{ mount_base_path }}/swap/swapfile"
   tags:
     - config.swap.file.mkswap
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 Write swap entry in fstab
+- name: 02.08 Write swap entry in fstab
   mount: name=none
          src={{ mount_base_path }}/swap/swapfile
          fstype=swap
@@ -60,7 +59,7 @@
     - config.swap.fstab
   when: force or (not swap_file_exists.stat.exists)
 
-- name: 🤹 Mount swap
+- name: 02.09 Mount swap
   command: "swapon {{ mount_base_path }}/swap/swapfile"
   tags:
     - config.swap.file.swapon

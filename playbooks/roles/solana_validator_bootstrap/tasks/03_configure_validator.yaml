@@ -1,5 +1,5 @@
 ---
-- name: set default keypair
+- name: 03.01 Set default keypair in solana config
   shell: solana config set --keypair {{ secrets_path }}/validator-keypair.json
   become: yes
   become_user: "{{ solana_user}}"

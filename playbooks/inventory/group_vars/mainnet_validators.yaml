@@ -5,10 +5,10 @@ ramdisk_path: "{{ mount_base_path }}/ramdisk"
 ramdisk_size_gb: 400
 use_ramdisk_for_account: True
 use_firewall: True
-solana_user: solana
+solana_user: ubuntu
 solana_home: "/home/{{ solana_user }}"
 secrets_path: "/home/{{ solana_user }}/.secrets"
-solana_version: 1.18.22
+solana_version: 2.0.15
 env_path: "{{ solana_home }}/.local/share/solana/install/active_release/bin"
 cluster_rpc_address: 'https://api.mainnet-beta.solana.com'
 validator_log_path: "{{ mount_base_path }}/log"
@@ -18,8 +18,8 @@ solana_rpc_port: 8899
 expected_genesis_hash: 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d
 maximum_local_snapshot_age: 3000
 limit_ledger_size: 50000000
-ledger_path: /mnt/solana_ledger/ledger
-accounts_path: "{{ ramdisk_path }}/accounts"
+ledger_path: /mnt/solana/ledger
+accounts_path: /mnt/solana/accounts
 snapshots_path: /mnt/solana/snapshots
 open_solana_ports_start: 8000
 open_solana_ports_end: 10000

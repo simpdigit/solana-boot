@@ -1,0 +1,27 @@
+---
+- name: 01.01 Create temp download dir
+  file:
+    path: /tmp/solana
+    state: directory
+    owner: "{{ solana_user }}"
+    group: "{{ solana_user }}"
+  tags:
+    - cli.install
+- name: 01.02 Install Agave binary v{{ solana_version }}
+  block:
+    - name: install solana using anza installer
+      shell: |
+        sh -c "$(curl -sSfL https://release.anza.xyz/v{{ solana_version }}/install)"
+      args:
+        executable: /bin/bash
+  become: yes
+  become_user: "{{ solana_user }}"
+  tags:
+    - cli.install
+
+- name: 01.03 Remove installer
+  file:
+    path: /tmp/solana
+    state: absent
+  tags:
+    - cli.install

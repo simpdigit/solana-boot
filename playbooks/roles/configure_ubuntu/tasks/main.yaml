@@ -1,48 +1,50 @@
 ---
 
-- name: 📦 Install additional packages
-  import_tasks: packages.yaml
+- name: 01 Install additional packages
+  import_tasks: 01_packages.yaml
   tags:
     - config.packages
 
-- name: 🤹 Create swap
-  import_tasks: swap.yaml
+- name: 02 Create swap
+  import_tasks: 02_swap.yaml
   tags:
     - config.swap
   when: swap_file_size_gb | int  > 0
 
-- name: 💾 Create ramdisk
-  import_tasks: ramdisk.yaml
+- name: 03 Create ramdisk
+  import_tasks: 03_ramdisk.yaml
   tags:
     - config.ramdisk
   when: use_ramdisk_for_account
 
-- name: 🏎 Config cpu governor performance mode
-  import_tasks: governor.yaml
+- name: 04 Config cpu governor performance mode
+  import_tasks: 04_governor.yaml
   tags:
     - config.cpu
 
-- name: 🔥 Config firewall
-  import_tasks: firewall.yaml
+- name: 05 Config firewall
+  import_tasks: 05_firewall.yaml
   tags:
     - config.firewall
   when:
     use_firewall | bool
 
-- name: 🚫 Config file2ban
-  import_tasks: fail2ban.yaml
+- name: 06 Config file2ban
+  import_tasks: 06_fail2ban.yaml
   tags:
     - config.fail2ban
 
-- name: 🐸 Create solana user
-  import_tasks: solana_user.yaml
+- name: 07 Create solana user
+  import_tasks: 07_solana_user.yaml
   tags:
     - config.solana_user
     - validator.service.solana
 
-- name: 🔧 Config sysctl
-  import_tasks: sysctl.yaml
+- name: 08 Config sysctl
+  import_tasks: 08_sysctl.yaml
 
-- name: ⌚ chronly
-  import_tasks: chronly.yaml
+- name: 09 chronly
+  import_tasks: 09_chronly.yaml
 
+- name: 10 Mount disks for Ledger and Accounts
+  import_tasks: 10_mount_solana_disks_3.yaml

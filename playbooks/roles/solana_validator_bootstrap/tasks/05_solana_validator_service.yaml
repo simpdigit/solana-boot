@@ -1,5 +1,5 @@
 ---
-- name: Create solana validator service
+- name: 05.01 Create Solana validator service file
   template:
     src: solana-validator.service.j2
     dest: /etc/systemd/system/solana-validator.service
@@ -9,13 +9,13 @@
   tags:
     - validator.service.solana
 
-- name: Reload systemd
+- name: 05.02 Reload systemd
   systemd:
     daemon_reload: yes
   tags:
     - validator.service.solana
 
-- name: Enable solana service
+- name: 05.03 Enable solana service
   systemd:
     name: solana-validator
     enabled: yes

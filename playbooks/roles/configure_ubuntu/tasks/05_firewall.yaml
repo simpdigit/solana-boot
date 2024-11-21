@@ -1,5 +1,5 @@
 ---
-- name: 🔥 Install firewall package
+- name: 05.01 Install firewall package ufw
   package:
     name:
       - ufw
@@ -7,14 +7,14 @@
   tags:
     - config.firewall
 
-- name: 🔥 Deny all ingress connections
+- name: 05.02 Deny all ingress connections
   ufw:
     policy: deny
     direction: incoming
   tags:
     - config.firewall
 
-- name: 🔥 allow ingress ssh
+- name: 05.03 Allow ingress ssh
   ufw:
     rule: allow
     port: ssh
@@ -23,7 +23,7 @@
   tags:
     - config.firewall
 
-- name: 🔥 allow ingress solana udp ports
+- name: 05.04 Allow ingress solana udp ports
   ufw:
     rule: allow
     proto: udp
@@ -32,7 +32,7 @@
   tags:
     - config.firewall
 
-- name: 🔥 allow ingress solana tcp ports
+- name: 05.05 Allow ingress solana tcp ports
   ufw:
     rule: allow
     proto: tcp
@@ -41,7 +41,7 @@
   tags:
     - config.firewall
 
-- name: 🔥 Enable ufw
+- name: 05.06 Enable ufw
   ufw:
     state: enabled
   tags:

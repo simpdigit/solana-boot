@@ -1,5 +1,5 @@
 ---
-- name: 🚫 Install fail2ban package
+- name: 06.01 Install fail2ban package
   package:
     name:
       - fail2ban
@@ -7,7 +7,7 @@
   tags:
     - config.fail2ban
 
-- name: 🚫 Create jail.local
+- name: 06.02 Create jail.local
   template:
     src: jail.local.j2
     dest: /etc/fail2ban/jail.local
@@ -17,7 +17,7 @@
   tags:
     - config.fail2ban
 
-- name: 🚫 Restart fail2ban
+- name: 06.03 Restart fail2ban
   systemd:
     name: fail2ban
     state: restarted

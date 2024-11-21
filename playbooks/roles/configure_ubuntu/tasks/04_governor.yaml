@@ -1,5 +1,5 @@
 ---
-- name: Copy cpu-performance.service systemd service file
+- name: 04.01 Copy cpu-performance.service systemd service file
   copy:
     src: "../files/cpu-performance.service"
     dest: /etc/systemd/system/cpu-performance.service
@@ -7,11 +7,11 @@
     owner: root
     group: root
 
-- name: Reload systemd
+- name: 04.02 Reload systemd
   systemd:
     daemon_reload: yes
 
-- name: Enable cpu-performance service
+- name: 04.03 Enable cpu-performance service
   systemd:
     name: cpu-performance
     enabled: yes

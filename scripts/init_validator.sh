@@ -33,10 +33,10 @@
 
 die()
 {
-	local _ret="${2:-1}"
-	test "${_PRINT_HELP:-no}" = yes && print_help >&2
-	echo "$1" >&2
-	exit "${_ret}"
+	local _ret="${2:-1}"						# Set return code, default to 1 if not provided
+	test "${_PRINT_HELP:-no}" = yes && print_help >&2		# Conditionally print help
+	echo "$1" >&2							# Print error message to stderr
+	exit "${_ret}"							# Exit the script with specified or default return code
 }
 
 
@@ -49,17 +49,17 @@ begins_with_short_option()
 
 # THE DEFAULTS INITIALIZATION - OPTIONALS
 _arg_cluster="mainnet-beta"
-_arg_ledger_path="/mnt/solana/ledger"
-_arg_snapshots_path="/mnt/solana/snapshots"
-_arg_accounts_path="/mnt/solana/accounts"
+_arg_ledger_path="/home/solana/ubuntu/ledger"
+_arg_snapshots_path="/home/solana/ubuntu/snapshots"
+_arg_accounts_path="/home/solana/ubuntu/accounts"
 _arg_log_level="WARN"
 _arg_ramdisk_size_gb="200"
-_arg_swap_file_size_gb="128"
-_arg_secrets_path="/home/solana/.secrets"
-_arg_solana_user="solana"
-_arg_solana_version="1.13.6"
-_arg_use_ramdisk_for_account="True"
-_arg_jito_enable="False"
+_arg_swap_file_size_gb="16"
+_arg_secrets_path="/home/ubuntu/.secrets"
+_arg_solana_user="ubuntu"
+_arg_solana_version="2.0.15"
+_arg_use_ramdisk_for_account="False"
+_arg_jito_enable="True"
 _arg_jito_block_engine_url=
 _arg_jito_relayer_url=
 _arg_jito_receiver_addr=

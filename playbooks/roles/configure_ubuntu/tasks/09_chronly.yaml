@@ -1,5 +1,5 @@
 ---
-- name: Disable conflicting services
+- name: 09.01 Disable conflicting services
   ansible.builtin.service:
     name: "{{ item }}"
     state: stopped
@@ -14,7 +14,7 @@
     - openntpd
     - systemd-timesyncd
 
-- name: make sure chronyd is installed
+- name: 09.02 Make sure chronyd is installed
   become: true
   become_user: root
   ansible.builtin.apt:
@@ -23,7 +23,7 @@
     pkg:
       - chrony
 
-- name: Restart chronyd
+- name: 09.03 Restart chronyd
   become: true
   become_user: root
   ansible.builtin.systemd:
