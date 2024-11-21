@@ -47,4 +47,4 @@
   import_tasks: 09_chronly.yaml
 
 - name: 10 Mount disks for Ledger and Accounts
-  import_tasks: 10_mount_solana_disks_3.yaml
+  import_tasks: 10_mount_solana_disks.yaml
